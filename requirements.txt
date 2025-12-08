@@ -1,7 +1,7 @@
 scikit-learn
 pandas
 numpy
-jijna2
+jinja2
 fastapi
 uvicorn
 python-multipart
