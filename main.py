@@ -20,8 +20,8 @@ def home(request: Request):
 
 
 # Predict route (HTML form se POST aayega)
-@app.post("/predict")
-def predict(
+@app.post("/predict", response_class=HTMLResponse)
+def predict( request: Request,
     Pregnancies: int = Form(...),
     Glucose: float = Form(...),
     BloodPressure: float = Form(...),
@@ -39,4 +39,4 @@ def predict(
 
     result = "Diabetic" if prediction == 1 else "Not Diabetic"
 
-    return templates.TemplateResponse("index.html", {"request": request, "prediction": result})
+    return templates.TemplateResponse("index.html", {"request": request,"prediction": result})
