@@ -38,4 +38,5 @@ def predict(
     prediction = model.predict(user_data)[0]
 
     result = "Diabetic" if prediction == 1 else "Not Diabetic"
-    return {"prediction": result}
+
+    return templates.TemplateResponse("index.html", {"request": request, "prediction": result})
