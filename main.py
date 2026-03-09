@@ -7,7 +7,7 @@ import pickle
 app = FastAPI()
 
 # Load model
-with open("model.pkl", "rb") as f:
+with open("model_Rb.pkl", "rb") as f:
     model = pickle.load(f)
 
 # Templates folder
