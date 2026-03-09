@@ -44,6 +44,9 @@ print(df.isnull().sum())
 numeric_cols = X_train.select_dtypes(include=["int64", "float64"]).columns.tolist()
 categorical_cols = X_train.select_dtypes(include=["object", "category"]).columns.tolist()
 
+all = numeric_cols + categorical_cols
+print("calculate columns:", all)
+
 
 # --------------------------------
 # 5) Preprocessing Pipelines

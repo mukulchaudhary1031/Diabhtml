@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 import numpy as np
 import pickle
+import pandas as pd 
 
 app = FastAPI()
 
@@ -31,9 +32,17 @@ def predict( request: Request,
     DiabetesPedigreeFunction: float = Form(...),
     Age: int = Form(...)
 ):
-    user_data = np.array([[Pregnancies, Glucose, BloodPressure,
-                           SkinThickness, Insulin, BMI,
-                           DiabetesPedigreeFunction, Age]])
+    user_data = pd.DataFrame({
+    "Pregnancies":[Pregnancies],
+    "Glucose":[Glucose],
+    "BloodPressure":[BloodPressure],
+    "SkinThickness":[SkinThickness],
+    "Insulin":[Insulin],
+    "BMI":[BMI],
+    "DiabetesPedigreeFunction":[DiabetesPedigreeFunction],
+    "Age":[Age]
+})
+
 
     prediction = model.predict(user_data)[0]
 
