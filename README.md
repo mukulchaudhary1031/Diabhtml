@@ -2,7 +2,6 @@
 
  Diabetes Prediction Project (with Live Deployment)
 
- LIVE LINK = https://diabhtml.onrender.com
 
 # Diabetes Prediction System 🩺
 
@@ -58,8 +57,8 @@ The dataset contains patient health information with features like:
 ---
 
 ## Live Demo
-Access the running application here:  
-**[Live App on Render](https://<your-render-url>.onrender.com)**
+Access the running application here:  https://diabhtml.onrender.com
+
 
 ---
 
