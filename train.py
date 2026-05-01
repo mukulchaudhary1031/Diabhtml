@@ -7,7 +7,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder
 from sklearn.impute import SimpleImputer
-from sklearn.metrics import accuracy_score , confusion_matrix
+from sklearn.metrics import accuracy_score , confusion_matrix 
 from sklearn.ensemble import RandomForestClassifier 
 
 
