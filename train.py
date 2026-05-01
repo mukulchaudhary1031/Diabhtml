@@ -28,9 +28,7 @@ print(df.head(9))
 X = df.iloc[:, :-1]
 y = df.iloc[:, -1]
 
-# Encode target
-le = LabelEncoder()
-y = le.fit_transform(y)
+
 
 
 # Train Test Split
