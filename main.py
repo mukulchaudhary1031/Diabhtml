@@ -3,26 +3,22 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 import numpy as np
 import pickle
-import pandas as pd 
+import pandas as pd
 
 app = FastAPI()
 
-# Load model
 with open("model_Rb.pkl", "rb") as f:
     model = pickle.load(f)
 
-# Templates folder
 templates = Jinja2Templates(directory="templates")
 
-# Home route → HTML return karega
 @app.get("/", response_class=HTMLResponse)
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-
-# Predict route (HTML form se POST aayega)
 @app.post("/predict", response_class=HTMLResponse)
-def predict( request: Request,
+def predict(
+    request: Request,
     Pregnancies: float = Form(...),
     Glucose: float = Form(...),
     BloodPressure: float = Form(...),
@@ -32,20 +28,24 @@ def predict( request: Request,
     DiabetesPedigreeFunction: float = Form(...),
     Age: float = Form(...)
 ):
-    user_data = pd.DataFrame({
-    "Pregnancies":[Pregnancies],
-    "Glucose":[Glucose],
-    "BloodPressure":[BloodPressure],
-    "SkinThickness":[SkinThickness],
-    "Insulin":[Insulin],
-    "BMI":[BMI],
-    "DiabetesPedigreeFunction":[DiabetesPedigreeFunction],
-    "Age":[Age]
-})
+    try:
+        user_data = pd.DataFrame([[
+            Pregnancies, Glucose, BloodPressure,
+            SkinThickness, Insulin, BMI,
+            DiabetesPedigreeFunction, Age
+        ]], columns=[
+            "Pregnancies", "Glucose", "BloodPressure",
+            "SkinThickness", "Insulin", "BMI",
+            "DiabetesPedigreeFunction", "Age"
+        ])
 
+        prediction = model.predict(user_data)[0]
+        result = "Diabetic 🔴" if prediction == 1 else "Not Diabetic 🟢"
 
-    prediction = model.predict(user_data)[0]
+    except Exception as e:
+        result = f"Error: {str(e)}"
 
-    result = "Diabetic" if prediction == 1 else "Not Diabetic"
-
-    return templates.TemplateResponse("index.html", {"request": request,"prediction": result})
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "prediction": result
+    })
