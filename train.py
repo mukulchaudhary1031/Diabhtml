@@ -88,16 +88,13 @@ pipeline = Pipeline(steps=[
 
 param_grid = {
     'model__n_estimators': [100, 200, 300],
-    'model__max_depth': [None, 5, 10, 20],
-    'model__min_samples_split': [2, 5, 10],
-    'model__min_samples_leaf': [1, 2, 4],
-    'model__bootstrap': [True, False]
+    'model__max_depth': [None, 5, 10, 20]
 }
 
 grid = GridSearchCV(
 pipeline,
 param_grid=param_grid,
-cv= 3,
+cv= 5,
 scoring='accuracy'
 )
 
