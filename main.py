@@ -23,14 +23,14 @@ def home(request: Request):
 # Predict route (HTML form se POST aayega)
 @app.post("/predict", response_class=HTMLResponse)
 def predict( request: Request,
-    Pregnancies: int = Form(...),
+    Pregnancies: float = Form(...),
     Glucose: float = Form(...),
     BloodPressure: float = Form(...),
     SkinThickness: float = Form(...),
     Insulin: float = Form(...),
     BMI: float = Form(...),
     DiabetesPedigreeFunction: float = Form(...),
-    Age: int = Form(...)
+    Age: float = Form(...)
 ):
     user_data = pd.DataFrame({
     "Pregnancies":[Pregnancies],
